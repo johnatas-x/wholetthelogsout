@@ -1,49 +1,57 @@
-# gitignore template for Drupal 8 projects
-#
-# earlier versions of Drupal are tracked in `community/PHP/`
+# gitignore template for Drupal 10 projects
 
 # Ignore configuration files that may contain sensitive information
-/sites/*/*settings*.php
-/sites/*/*services*.yml
+/web/sites/*/*settings*.php
+/web/sites/*/*services*.yml
 
 # Ignore paths that may contain user-generated content
-/sites/*/files
-/sites/*/public
-/sites/*/private
-/sites/*/files-public
-/sites/*/files-private
+/web/sites/*/files
+/web/sites/*/public
+/web/sites/*/private
+/web/sites/*/files-public
+/web/sites/*/files-private
 
 # Ignore paths that may contain temporary files
-/sites/*/translations
-/sites/*/tmp
-/sites/*/cache
+/web/sites/*/translations
+/web/sites/*/tmp
+/web/sites/*/cache
 
 # Ignore testing related files
-/sites/simpletest
+/web/sites/simpletest
 
 # Ignore drupal core (if not versioning drupal sources)
-/core
-/modules/README.txt
-/profiles/README.txt
-/sites/README.txt
-/sites/example.sites.php
-/sites/example.settings.local.php
-/sites/development.services.yml
-/themes/README.txt
+/web/core
+/web/modules/README.txt
+/web/profiles/README.txt
+/web/sites/README.txt
+/web/sites/example.sites.php
+/web/sites/example.settings.local.php
+/web/sites/development.services.yml
+/web/themes/README.txt
 /vendor
-/.csslintrc
+/web/.csslintrc
 /.editorconfig
-/.eslintignore
-/.eslintrc.json
+/web/.eslintignore
+/web/.eslintrc.json
 /.gitattributes
-/.htaccess
-/autoload.php
-/composer.json
+/web/.htaccess
+/web/autoload.php
 /composer.lock
-/example.gitignore
-/index.php
-/LICENSE.txt
-/README.txt
-/robots.txt
-/update.php
-/web.config
+/web/example.gitignore
+/web/index.php
+/web/LICENSE.txt
+/web/README.txt
+/web/robots.txt
+/web/update.php
+/web/web.config
+
+# Ignore idea folder
+.idea
+
+# Ignore docksal local configurations
+.docksal/docksal-local.env
+.docksal/docksal-local.yml
+
+# Ignore contrib
+/web/modules/contrib
+/web/themes/contrib

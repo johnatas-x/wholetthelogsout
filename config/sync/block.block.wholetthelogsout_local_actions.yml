@@ -1,0 +1,20 @@
+uuid: 431c7a5d-dae9-4c9a-b33f-d362cfb05c7a
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - wholetthelogsout
+_core:
+  default_config_hash: ABoKnlk20KHqZRw_2Qr4EvaFvH4lnQ2nuhunHeE1JIU
+id: wholetthelogsout_local_actions
+theme: wholetthelogsout
+region: content
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: "Actions d'administration principales"
+  label_display: '0'
+  provider: core
+visibility: {  }

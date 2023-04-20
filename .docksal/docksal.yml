@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  web:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: nginx
+    depends_on:
+      - cli
+    extra_hosts:
+      - "${VIRTUAL_HOST}:${DOCKSAL_HOST_IP}"
+    labels:
+      - io.docksal.virtual-host=${VIRTUAL_HOST},*.${VIRTUAL_HOST},${VIRTUAL_HOST}.*
+  db:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mariadb
+  cli:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: cli
+    extra_hosts:
+      - "${VIRTUAL_HOST}:${DOCKSAL_HOST_IP}"
+    environment:
+      - MEMCACHED_HOST
+      - SECRET_WEB_KEEPALIVE=0
+  varnish:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: varnish
+    environment:
+      - VARNISH_CACHE_TAGS_HEADER=Cache-Tags
+    depends_on:
+      - web
+  memcached:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: memcached
+  mail:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mail

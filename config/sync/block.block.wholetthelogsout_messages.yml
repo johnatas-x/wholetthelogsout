@@ -1,0 +1,22 @@
+uuid: 55d62864-b1a0-4da3-be7d-1594ea814d90
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wholetthelogsout
+_core:
+  default_config_hash: aeqlWs7HwctZeZC7ADcbxfqehJzBRfZKmuZz3DsH3_4
+id: wholetthelogsout_messages
+theme: wholetthelogsout
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Messages de statut'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: edc78068-1fc2-4789-b83c-b8dd322d2668
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - wholetthelogsout
+_core:
+  default_config_hash: T0wbI6qVdThbbIqXDZFg_1VZ3_ittXBdEoUH7d7ux_E
+id: wholetthelogsout_local_tasks
+theme: wholetthelogsout
+region: content
+weight: -20
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Onglets
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

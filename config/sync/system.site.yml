@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
+langcode: fr
+uuid: b9c4cab1-299e-4810-b493-98e6d647f346
+name: 'Who Let the Logs Out'
+mail: noreply@wholetthelogsout.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /user/login
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
