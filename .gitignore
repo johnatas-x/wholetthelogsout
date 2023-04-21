@@ -30,7 +30,6 @@
 /web/themes/README.txt
 /vendor
 /web/.csslintrc
-/.editorconfig
 /web/.eslintignore
 /web/.eslintrc.json
 /.gitattributes

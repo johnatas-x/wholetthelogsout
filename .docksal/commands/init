@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
 
+## Init project.
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+# Remove & recreate project.
 fin project rm -f
 fin project start
+
+# Install vendor.
 fin composer install --no-progress --prefer-dist --optimize-autoloader
+
+# Copy settings.php.
+chmod -R 755 "${PROJECT_ROOT}/${DOCROOT}/sites/default"
 cp "${PROJECT_ROOT}/.docksal/files/settings.php.default" "${PROJECT_ROOT}/${DOCROOT}/sites/default/settings.php"
 chmod 644 "${PROJECT_ROOT}/${DOCROOT}/sites/default/settings.php"
+
+# Install site.
 fin drush site-install 'minimal' --config-dir=../config/sync --account-name='admin' --account-pass='admin' --yes
-#fin drush cset system.site uuid "870499f1-1a41-4439-b2ea-fdb5c1842d38" -y
+fin drush cset system.site uuid "b9c4cab1-299e-4810-b493-98e6d647f346" -y
 fin drush deploy
 fin drush locale-check
 fin drush locale-update
