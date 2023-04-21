@@ -4,5 +4,4 @@ parameters:
     checkMissingIterableValueType: false
     paths:
         - web/modules/custom
-        - web/profiles/custom
         - web/themes/custom

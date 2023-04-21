@@ -37,7 +37,6 @@ grumphp:
     phpcpd:
       directory: [
         'web/modules/custom',
-        'web/profiles/custom',
         'web/themes/custom'
       ]
       exclude: [ ]
@@ -58,7 +57,6 @@ grumphp:
       report_width: ~
       whitelist_patterns:
         - web/modules/custom
-        - web/profiles/custom
         - web/themes/custom
       encoding: ~
       ignore_patterns: [ ]
@@ -85,7 +83,6 @@ grumphp:
     phpmd:
       whitelist_patterns:
         - /^web\/modules\/custom\/(.*)/
-        - /^web\/profiles\/custom\/(.*)/
         - /^web\/themes\/custom\/(.*)/
       exclude: [ ]
       report_format: text
@@ -100,7 +97,6 @@ grumphp:
       directory: web
       whitelist_patterns:
         - /^web\/modules\/custom\/(.*)/
-        - /^web\/profiles\/custom\/(.*)/
         - /^web\/themes\/custom\/(.*)/
       exclude: [ ]
       exclude_name: [ ]
@@ -159,7 +155,6 @@ grumphp:
       whitelist_patterns:
         - /^config\/(.*)/
         - /^web\/modules\/custom\/(.*)/
-        - /^web\/profiles\/custom\/(.*)/
         - /^web\/themes\/custom\/(.*)/
       ignore_patterns: [ ]
       object_support: false
