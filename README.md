@@ -1,5 +1,6 @@
+<img src="web/themes/custom/wholetthelogsout/images/wholetthelogsout_logo_1024px.png" align="left" width="115"/>
+
 # Who Let the Logs Out
-![logo](web/themes/custom/wholetthelogsout/images/wholetthelogsout_logo_90px.png)
 
 This project is inspired by the [Loggable](https://github.com/mikestefanello/loggable)
 project.
