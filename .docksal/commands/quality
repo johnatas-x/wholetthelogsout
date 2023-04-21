@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Execute quality tools.
+##
+## Usage: fin quality
+
+fin exec "php ./vendor/bin/grumphp run"
