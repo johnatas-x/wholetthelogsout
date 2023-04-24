@@ -95,10 +95,12 @@ grumphp:
         - theme
     phpmnd:
       directory: web
-      whitelist_patterns:
-        - /^web\/modules\/custom\/(.*)/
-        - /^web\/themes\/custom\/(.*)/
-      exclude: [ ]
+      whitelist_patterns: [ ]
+      exclude:
+        - core
+        - modules/contrib
+        - profiles/contrib
+        - themes/contrib
       exclude_name: [ ]
       exclude_path: [ ]
       extensions: [ ]
@@ -132,7 +134,8 @@ grumphp:
       use_grumphp_paths: false
     shell:
       scripts:
-        - .docksal/commands/*
+        - [ "-c", ".docksal/commands/init"]
+        - [ "-c", ".docksal/commands/quality"]
     twigcs:
       path: 'web'
       severity: 'warning'

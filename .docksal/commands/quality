@@ -4,4 +4,6 @@
 ##
 ## Usage: fin quality
 
-fin exec "php ./vendor/bin/grumphp run"
+if [ -x "$(command -v fin)" ]; then
+  fin exec "php ./vendor/bin/grumphp run"
+fi
