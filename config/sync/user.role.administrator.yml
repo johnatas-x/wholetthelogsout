@@ -1,0 +1,53 @@
+uuid: 1755974d-7328-4a5d-9832-c57a838f59bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - block
+    - file
+    - filter
+    - language
+    - locale
+    - node
+    - system
+    - update
+    - wholetthelogsout
+id: administrator
+label: Administrator
+weight: 2
+is_admin: true
+permissions:
+  - 'access administration pages'
+  - 'access content'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access site in maintenance mode'
+  - 'access site reports'
+  - 'access user profiles'
+  - 'administer account settings'
+  - 'administer blocks'
+  - 'administer content types'
+  - 'administer filters'
+  - 'administer languages'
+  - 'administer menu'
+  - 'administer modules'
+  - 'administer nodes'
+  - 'administer permissions'
+  - 'administer site configuration'
+  - 'administer software updates'
+  - 'administer themes'
+  - 'administer users'
+  - 'administer website entities'
+  - 'bypass node access'
+  - 'cancel account'
+  - 'change own username'
+  - 'delete all revisions'
+  - 'link to any page'
+  - 'revert all revisions'
+  - 'select account cancellation method'
+  - 'translate interface'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'view the administration theme'
+  - 'view update notifications'
+  - 'view user email addresses'
