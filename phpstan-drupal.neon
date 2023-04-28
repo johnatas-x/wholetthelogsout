@@ -1,0 +1,9 @@
+# Mandatory exceptions for Drupal.
+# Ignore certain standards for legacy procedural functions in module, theme, and includes.
+# Specifically centered around hook/alters and lack of proper types.
+
+parameters:
+    ignoreErrors:
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z\\_]+ with no type specified\./'
+        path: *.module
