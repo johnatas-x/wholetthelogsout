@@ -1,0 +1,5 @@
+entity.website.collection:
+  title: 'Websites'
+  route_name: entity.website.collection
+  description: 'List and manage website entities.'
+  parent: system.admin_structure

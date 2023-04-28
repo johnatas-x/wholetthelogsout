@@ -1,0 +1,5 @@
+entity.website.add_form:
+  route_name: entity.website.add_form
+  title: 'Add website'
+  appears_on:
+    - entity.website.collection

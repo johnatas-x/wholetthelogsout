@@ -1,0 +1,10 @@
+name: 'Who Let the Logs Out'
+type: module
+description: 'All features for the tool.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:link
+  - drupal:options
+  - drupal:system
+  - drupal:user
