@@ -1,10 +1,10 @@
 uuid: c751701a-5351-4fbc-9693-fececdd46ee1
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 _core:
   default_config_hash: OjekiQuX9RbVQ2_8jOHBL94RgYLePqX7wpfNGgcQzrk
 id: html_year
-label: 'Année HTML'
+label: 'HTML Year'
 locked: true
 pattern: 'Y'

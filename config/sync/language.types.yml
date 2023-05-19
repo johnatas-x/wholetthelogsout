@@ -1,6 +1,6 @@
 _core:
   default_config_hash: dqouFqVseNJNvEjsoYKxbinFOITuCxYhi4y2OTNQP_8
-langcode: fr
+langcode: en
 all:
   - language_interface
   - language_content

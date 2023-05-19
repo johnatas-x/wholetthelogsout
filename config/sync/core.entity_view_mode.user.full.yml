@@ -1,5 +1,5 @@
 uuid: 379ab423-6d32-4ca6-a4a6-63700cb4be43
-langcode: fr
+langcode: en
 status: false
 dependencies:
   module:
@@ -7,6 +7,6 @@ dependencies:
 _core:
   default_config_hash: mQIF_foYjmnVSr9MpcD4CTaJE_FpO1AyDd_DskztGhM
 id: user.full
-label: 'Compte utilisateur'
+label: 'User account'
 targetEntityType: user
 cache: true
