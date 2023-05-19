@@ -59,6 +59,20 @@ class Website extends EntityBase implements WebsiteInterface {
   use EntityChangedTrait;
 
   /**
+   * Entity's name.
+   *
+   * @var string
+   */
+  protected string $name;
+
+  /**
+   * Entity's URL.
+   *
+   * @var mixed
+   */
+  protected mixed $url;
+
+  /**
    * {@inheritdoc}
    */
   public function getCacheTagsToInvalidate(): array {

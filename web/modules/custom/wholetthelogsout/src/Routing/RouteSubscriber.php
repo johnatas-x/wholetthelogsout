@@ -26,7 +26,7 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function alterRoutes(RouteCollection $collection): void {
     // Remove CSRF requirement, require auth user role, only allow key
-    // authentication for the beacon entity type API routes.
+    // authentication for the custom entity type API routes.
     foreach (CustomEntityTypes::cases() as $type) {
       // Iterate the endpoints.
       foreach (self::ENDPOINTS as $endpoint) {

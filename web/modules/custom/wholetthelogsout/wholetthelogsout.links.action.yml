@@ -3,3 +3,37 @@ entity.website.add_form:
   title: 'Add website'
   appears_on:
     - entity.website.collection
+
+website.url_redirect:
+  route_name: entity.website.url_redirect
+  title: 'Website URL'
+  weight: 2
+  options:
+    attributes:
+      target: _blank
+  appears_on:
+    - entity.website.canonical
+
+website.alerts.add_form:
+  route_name: entity.alert.add_form
+  title: 'Add alert'
+  class: \Drupal\wholetthelogsout\Plugin\Menu\LocalAction\WebsiteEntityContextual
+  appears_on:
+    - view.wholetthelogsout_website_alerts.page_1
+website_ids.add_form:
+  route_name: entity.website.add_form
+  title: 'Add website'
+  appears_on:
+    - view.wholetthelogsout_api_website_ids.page_1
+website.manage_alerts:
+  route_name: view.wholetthelogsout_website_alerts.page_1
+  title: 'Manage alerts'
+  weight: 1
+  appears_on:
+    - entity.website.canonical
+
+dashboard.website_add_form:
+  route_name: entity.website.add_form
+  title: 'Add website'
+  appears_on:
+    - wholetthelogsout.dashboard

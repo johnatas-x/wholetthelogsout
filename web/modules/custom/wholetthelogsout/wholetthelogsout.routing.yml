@@ -1,0 +1,12 @@
+entity.website.url_redirect:
+  path: '/website/{website}/url'
+  defaults:
+    _controller: '\Drupal\wholetthelogsout\Controller\WebsiteUrlRedirectController::redirectToWebsiteUrl'
+  requirements:
+    _custom_access: '\Drupal\wholetthelogsout\Controller\WebsiteUrlRedirectController::redirectAccess'
+    website: '[\d\w\-]+'
+  options:
+    parameters:
+      website:
+        type: entity_uuid
+        entity_type_id: website

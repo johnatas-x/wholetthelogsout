@@ -8,7 +8,7 @@ use Drupal\Core\Link;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * Defines a class to build a listing of Beacon entities.
+ * Defines a class to build a listing of Custom entities.
  */
 class EntityListBuilder extends CoreEntityListBuilder {
 
