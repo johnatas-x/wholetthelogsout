@@ -18,7 +18,7 @@ function wholetthelogsout_theme($existing, $type, $theme, $path): array {
   foreach (CustomEntityTypes::cases() as $type) {
     $items[$type->value] = [
       'render element' => 'elements',
-      'file' => "$type->value.page.inc",
+      'file' => "includes/$type->value.page.inc",
     ];
   }
 
