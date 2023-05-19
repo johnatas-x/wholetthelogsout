@@ -5,11 +5,11 @@ dependencies:
   module:
     - system
   theme:
-    - wholetthelogsout
+    - wholetthelogsout_w3css
 _core:
   default_config_hash: sG8t_FghbUscJ-GrnQ8zs_vx5YM4bJCfntrK-J5HcAY
-id: wholetthelogsout_branding
-theme: wholetthelogsout
+id: wholetthelogsout_w3css_branding
+theme: wholetthelogsout_w3css
 region: header
 weight: 0
 provider: null

@@ -1,4 +1,4 @@
-<img src="web/themes/custom/wholetthelogsout/images/wholetthelogsout_logo_1024px.png" align="left" width="115"/>
+<img src="web/themes/custom/wholetthelogsout_w3css/images/wholetthelogsout_logo_1024px.png" align="left" width="115"/>
 
 # Who Let the Logs Out
 

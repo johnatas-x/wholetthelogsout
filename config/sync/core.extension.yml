@@ -23,5 +23,5 @@ module:
   minimal: 1000
 theme:
   drupal8_w3css_theme: 0
-  wholetthelogsout: 0
+  wholetthelogsout_w3css: 0
 profile: minimal

@@ -3,11 +3,11 @@ langcode: fr
 status: true
 dependencies:
   theme:
-    - wholetthelogsout
+    - wholetthelogsout_w3css
 _core:
   default_config_hash: Oh72CHUkp6cj6dbrXMK2hzCsM05w9cHVoD22rMLQUfk
-id: wholetthelogsout_page_title
-theme: wholetthelogsout
+id: wholetthelogsout_w3css_page_title
+theme: wholetthelogsout_w3css
 region: content
 weight: -30
 provider: null

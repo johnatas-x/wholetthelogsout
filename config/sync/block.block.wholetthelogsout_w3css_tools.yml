@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - wholetthelogsout
+    - wholetthelogsout_w3css
 _core:
   default_config_hash: UL5ZZvI0Lnp3fmVmhIDxvNI9RlMD0sfBIOi9ozr-k5o
-id: wholetthelogsout_tools
-theme: wholetthelogsout
+id: wholetthelogsout_w3css_tools
+theme: wholetthelogsout_w3css
 region: sidebar_first
 weight: 0
 provider: null

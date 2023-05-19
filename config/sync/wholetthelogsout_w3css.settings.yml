@@ -5,7 +5,7 @@ features:
   favicon: 1
 logo:
   use_default: 0
-  path: themes/custom/wholetthelogsout/images/wholetthelogsout_logo_90px.png
+  path: themes/custom/wholetthelogsout_w3css/images/wholetthelogsout_logo_90px.png
 favicon:
   use_default: 0
   path: favicon.ico
