@@ -24,7 +24,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\wholetthelogsout\EntityListBuilder",
  *     "views_data" = "Drupal\wholetthelogsout\Entity\WebsiteViewsData",
- *
  *     "form" = {
  *       "default" = "Drupal\wholetthelogsout\Form\WebsiteForm",
  *       "add" = "Drupal\wholetthelogsout\Form\WebsiteForm",

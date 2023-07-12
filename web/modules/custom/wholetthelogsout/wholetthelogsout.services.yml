@@ -6,7 +6,3 @@ services:
     arguments: [ '@entity.repository' ]
     tags:
       - { name: paramconverter }
-  wholetthelogsout.route_subscriber:
-    class: Drupal\wholetthelogsout\Routing\RouteSubscriber
-    tags:
-      - { name: event_subscriber }

@@ -39,7 +39,7 @@ class EntityHtmlRouteProvider extends AdminHtmlRouteProvider {
           'entity_type_id' => $entity_type_id,
         ],
       ]);
-      $route?->setRequirement($entity_type_id, '[\d\w\-]+');
+      $route?->setRequirement($entity_type_id, '[\w\-]+');
     }
 
     return $collection;

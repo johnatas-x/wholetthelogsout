@@ -23,9 +23,12 @@ class ContentEntityDeleteForm extends CoreContentEntityDeleteForm {
     assert($entity instanceof EntityBaseInterface);
 
     $parent = $entity->getParent();
-    assert($parent instanceof EntityInterface);
 
-    return $parent->toUrl('canonical');
+    if ($parent instanceof EntityInterface) {
+      return $parent->toUrl('canonical');
+    }
+
+    return Url::fromRoute('<front>');
   }
 
 }
