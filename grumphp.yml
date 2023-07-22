@@ -136,6 +136,8 @@ grumphp:
       scripts:
         - [ "-c", ".docksal/commands/init"]
         - [ "-c", ".docksal/commands/quality"]
+        - .docksal/helpers/styles
+        - .docksal/helpers/variables
     twigcs:
       path: 'web'
       severity: 'warning'

@@ -1,0 +1,7 @@
+PROJECT_ROOT="/var/www"
+DOCROOT_PATH="${PROJECT_ROOT}/web"
+SITESDIR_PATH="${DOCROOT_PATH}/sites"
+SITE="default"
+SITE_PATH="${SITESDIR_PATH}/${SITE}"
+THEME="wholetthelogsout_w3css"
+THEME_PATH="${DOCROOT_PATH}/themes/custom/${THEME}"

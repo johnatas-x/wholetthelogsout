@@ -1,0 +1,38 @@
+# Font colors.
+NC='\033[0m'
+BLUE='\033[1;34m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+
+# Background colors.
+BG_GREEN='\033[1;97;42m'
+BG_LAVENDER='\033[1;30;0;44m'
+BG_RED='\033[41m'
+BG_YELLOW='\033[43m'
+
+# Colors methods.
+echo_blue() {
+  echo -e "${BLUE}$1${NC}"
+}
+echo_green() {
+  echo -e "${GREEN}$1${NC}"
+}
+echo_red() {
+  echo -e "${RED}$1${NC}"
+}
+echo_yellow() {
+  echo -e "${YELLOW}$1${NC}"
+}
+echo_bg_green() {
+  echo -e "${BG_GREEN}$1${NC}"
+}
+echo_bg_lavender() {
+  echo -e "${BG_LAVENDER}$1${NC}"
+}
+echo_bg_red() {
+  echo -e "${BG_RED}$1${NC}"
+}
+echo_bg_yellow() {
+  echo -e "${BG_YELLOW}$1${NC}"
+}
