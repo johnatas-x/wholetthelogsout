@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Form;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -17,7 +19,7 @@ class WebsiteForm extends ContentEntityForm {
     $status = parent::save($form, $form_state);
 
     $this->messenger()->addMessage($this->t('%action the %label website.', [
-      '%action' => ($status === SAVED_NEW) ? 'Created' : 'Saved',
+      '%action' => $status === SAVED_NEW ? 'Created' : 'Saved',
       '%label' => $entity->label(),
     ]));
 

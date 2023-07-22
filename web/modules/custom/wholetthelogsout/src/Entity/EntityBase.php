@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Entity;
 
 use Drupal\Core\Cache\Cache;
@@ -18,71 +20,12 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   /**
    * {@inheritdoc}
    */
-  public static function preCreate(EntityStorageInterface $storage, array &$values): void {
-    parent::preCreate($storage, $values);
-
-    $values += [
-      'user_id' => \Drupal::currentUser()->id(),
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function invalidateTagsOnSave($update): void {
-    // We do not use list cache tags for these entities because they are all
-    // only accessible by the owning user, and the entity tags contain
-    // contextual tags already.
-    $tags = [];
-
-    if ($this->hasLinkTemplate('canonical')) {
-      // Creating or updating an entity may change a cached 403 or 404 response.
-      $tags = Cache::mergeTags($tags, ['4xx-response']);
-    }
-
-    // Also invalidate its unique cache tag.
-    // Core only does this for existing entities but we need it done for all.
-    $tags = Cache::mergeTags($tags, $this->getCacheTagsToInvalidate());
-
-    // Invalidate the tags.
-    Cache::invalidateTags($tags);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static function invalidateTagsOnDelete(EntityTypeInterface $entity_type, array $entities): void {
-    // Skip the list tags. See invalidateTagsOnSave().
-    $tags = [];
-
-    foreach ($entities as $entity) {
-      $tags = Cache::mergeTags($tags, $entity->getCacheTagsToInvalidate());
-    }
-
-    Cache::invalidateTags($tags);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function urlRouteParameters($rel): array {
-    $uri_route_parameters = parent::urlRouteParameters($rel);
-
-    // Switch the entity ID out for the UUID.
-    if (isset($uri_route_parameters[$this->getEntityTypeId()])) {
-      $uri_route_parameters[$this->getEntityTypeId()] = $this->uuid();
-    }
-
-    return $uri_route_parameters;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getName(): string {
     $name = $this->get('name')->value;
 
-    return (is_string($name)) ? $name : '';
+    return is_string($name)
+        ? $name
+        : '';
   }
 
   /**
@@ -98,7 +41,9 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   public function getCreatedTime(): int {
     $created = $this->get('created')->value;
 
-    return (is_int($created)) ? $created : 0;
+    return is_int($created)
+        ? $created
+        : 0;
   }
 
   /**
@@ -124,13 +69,15 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   public function getOwnerId(): ?int {
     $target = $this->get('user_id')->target_id;
 
-    return is_numeric($target) ? (int) $target : NULL;
+    return is_numeric($target)
+        ? (int) $target
+        : NULL;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setOwnerId($uid): EntityBase|EntityOwnerInterface|static {
+  public function setOwnerId($uid): self|EntityOwnerInterface|static {
     $this->set('user_id', $uid);
 
     return $this;
@@ -139,42 +86,10 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   /**
    * {@inheritdoc}
    */
-  public function setOwner(UserInterface $account): EntityBase|EntityOwnerInterface|static {
+  public function setOwner(UserInterface $account): self|EntityOwnerInterface|static {
     $this->set('user_id', $account->id());
 
     return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
-    $fields = parent::baseFieldDefinitions($entity_type);
-
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('User'))
-      ->setDescription(t('The user ID of owner of the entity.'))
-      ->setRequired(TRUE)
-      ->setSetting('target_type', 'user')
-      ->setDefaultValueCallback(static::class . '::getCurrentUserId')
-      ->setSetting('handler', 'default');
-
-    $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('Created'))
-      ->setDescription(t('The time that the entity was created.'));
-
-    $fields['changed'] = BaseFieldDefinition::create('changed')
-      ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the entity was last edited.'));
-
-    return $fields;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getParentReferenceFieldName(): ?string {
-    return NULL;
   }
 
   /**
@@ -217,6 +132,49 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function preCreate(EntityStorageInterface $storage, array &$values): void {
+    parent::preCreate($storage, $values);
+
+    $values += [
+      'user_id' => \Drupal::currentUser()->id(),
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
+    $fields = parent::baseFieldDefinitions($entity_type);
+
+    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('User')->render())
+      ->setDescription(t('The user ID of owner of the entity.')->render())
+      ->setRequired(TRUE)
+      ->setSetting('target_type', 'user')
+      ->setDefaultValueCallback(static::class . '::getCurrentUserId')
+      ->setSetting('handler', 'default');
+
+    $fields['created'] = BaseFieldDefinition::create('created')
+      ->setLabel(t('Created')->render())
+      ->setDescription(t('The time that the entity was created.')->render());
+
+    $fields['changed'] = BaseFieldDefinition::create('changed')
+      ->setLabel(t('Changed')->render())
+      ->setDescription(t('The time that the entity was last edited.')->render());
+
+    return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getParentReferenceFieldName(): ?string {
+    return NULL;
+  }
+
+  /**
    * Default value callback for 'user_id' base field definition.
    *
    * @see ::baseFieldDefinitions()
@@ -226,6 +184,56 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
    */
   public static function getCurrentUserId(): array {
     return [\Drupal::currentUser()->id()];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function invalidateTagsOnSave($update): void {
+    // We do not use list cache tags for these entities because they are all
+    // only accessible by the owning user, and the entity tags contain
+    // contextual tags already.
+    $tags = [];
+
+    if ($this->hasLinkTemplate('canonical')) {
+      // Creating or updating an entity may change a cached 403 or 404 response.
+      $tags = Cache::mergeTags($tags, ['4xx-response']);
+    }
+
+    // Also invalidate its unique cache tag.
+    // Core only does this for existing entities but we need it done for all.
+    $tags = Cache::mergeTags($tags, $this->getCacheTagsToInvalidate());
+
+    // Invalidate the tags.
+    Cache::invalidateTags($tags);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function urlRouteParameters($rel): array {
+    $uri_route_parameters = parent::urlRouteParameters($rel);
+
+    // Switch the entity ID out for the UUID.
+    if (isset($uri_route_parameters[$this->getEntityTypeId()])) {
+      $uri_route_parameters[$this->getEntityTypeId()] = $this->uuid();
+    }
+
+    return $uri_route_parameters;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function invalidateTagsOnDelete(EntityTypeInterface $entity_type, array $entities): void {
+    // Skip the list tags. See invalidateTagsOnSave().
+    $tags = [];
+
+    foreach ($entities as $entity) {
+      $tags = Cache::mergeTags($tags, $entity->getCacheTagsToInvalidate());
+    }
+
+    Cache::invalidateTags($tags);
   }
 
 }

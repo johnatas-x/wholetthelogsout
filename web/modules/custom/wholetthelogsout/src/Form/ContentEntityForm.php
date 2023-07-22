@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Form;
 
 use Drupal\Core\Entity\ContentEntityForm as CoreContentEntityForm;
@@ -25,9 +27,9 @@ class ContentEntityForm extends CoreContentEntityForm {
     $weight = &drupal_static(__METHOD__, 0);
 
     $form["{$wrapper}_wrapper"] = [
-      '#type' => 'details',
-      '#title' => $title,
       '#open' => TRUE,
+      '#title' => $title,
+      '#type' => 'details',
       '#weight' => $weight,
     ];
 

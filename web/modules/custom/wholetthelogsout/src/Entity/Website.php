@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Entity;
 
 use Drupal\Core\Cache\Cache;
@@ -82,13 +84,16 @@ class Website extends EntityBase implements WebsiteInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * phpcs:disable SlevomatCodingStandard.Functions.FunctionLength.FunctionLength
+   * phpcs:disable SlevomatCodingStandard.Files.FunctionLength.FunctionLength
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the website.'))
+      ->setLabel(t('Name')->render())
+      ->setDescription(t('The name of the website.')->render())
       ->setSettings([
         'max_length' => 64,
         'text_processing' => 0,
@@ -108,8 +113,8 @@ class Website extends EntityBase implements WebsiteInterface {
       ->setRequired(TRUE);
 
     $fields['url'] = BaseFieldDefinition::create('link')
-      ->setLabel(t('URL'))
-      ->setDescription(t('The URL of the website (like "https://mysite.docksal").'))
+      ->setLabel(t('URL')->render())
+      ->setDescription(t('The URL of the website (like "https://mysite.docksal").')->render())
       ->setSettings([
         'link_type' => 16,
         'title' => 0,

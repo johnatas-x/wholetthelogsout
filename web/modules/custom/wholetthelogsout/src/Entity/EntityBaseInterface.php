@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -44,14 +46,6 @@ interface EntityBaseInterface extends ContentEntityInterface, EntityChangedInter
   public function setCreatedTime(int $timestamp): void;
 
   /**
-   * Get the parent entity reference field name.
-   *
-   * @return string|null
-   *   The entity reference field name or NULL if this entity does not have one.
-   */
-  public static function getParentReferenceFieldName(): ?string;
-
-  /**
    * Get the parent entity reference entity type ID.
    *
    * This should automatically derive a value using
@@ -77,6 +71,14 @@ interface EntityBaseInterface extends ContentEntityInterface, EntityChangedInter
    * @return mixed|null
    *   The parent entity, if found, or NULL.
    */
-  public function getParent(string $parent_entity_type = NULL): mixed;
+  public function getParent(?string $parent_entity_type = NULL): mixed;
+
+  /**
+   * Get the parent entity reference field name.
+   *
+   * @return string|null
+   *   The entity reference field name or NULL if this entity does not have one.
+   */
+  public static function getParentReferenceFieldName(): ?string;
 
 }

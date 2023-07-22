@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout;
 
 use Drupal\Core\Access\AccessResult;
@@ -18,58 +20,6 @@ use Drupal\user\EntityOwnerInterface;
  * Access controller base for custom entities.
  */
 abstract class EntityAccessControlHandler extends CoreEntityAccessControlHandler {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResultNeutral|AccessResult|AccessResultAllowed|AccessResultInterface {
-    if (!$entity instanceof EntityOwnerInterface) {
-      return parent::checkAccess($entity, $operation, $account);
-    }
-
-    // Check admin access.
-    $admin = $this->userHasAdminPermission($account);
-
-    // Check if the account is the owner of the entity.
-    $is_owner = ($entity->getOwnerId() === $account->id());
-
-    // Determine access.
-    $access = AccessResult::allowedIf($admin || $is_owner);
-
-    // Add caching.
-    $access
-      ->cachePerUser()
-      ->addCacheableDependency($entity);
-
-    return $access;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL): AccessResultNeutral|AccessResult|AccessResultAllowed|AccessResultInterface {
-    // Allow authenticated users to create.
-    return AccessResult::allowedIf($this->userHasRole($account, 'authenticated'))
-      ->addCacheContexts(['user.roles']);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
-    // Always allow admin access.
-    if ($this->userHasAdminPermission($account)) {
-      return AccessResult::allowed()->cachePerPermissions();
-    }
-
-    // Check if this field is admin-only.
-    if ($field_definition->getSetting('admin_only')) {
-      // Restrict access to admins.
-      return AccessResult::forbidden()->cachePerPermissions();
-    }
-
-    return AccessResult::allowed();
-  }
 
   /**
    * Determine if a user has the admin permission of this entity type.
@@ -122,6 +72,68 @@ abstract class EntityAccessControlHandler extends CoreEntityAccessControlHandler
    */
   public function userLoad(AccountInterface $account): ?User {
     return User::load($account->id());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkAccess(EntityInterface $entity,
+    $operation,
+    AccountInterface $account
+  ): AccessResultNeutral|AccessResult|AccessResultAllowed|AccessResultInterface {
+    if (!$entity instanceof EntityOwnerInterface) {
+      return parent::checkAccess($entity, $operation, $account);
+    }
+
+    // Check admin access.
+    $admin = $this->userHasAdminPermission($account);
+
+    // Check if the account is the owner of the entity.
+    $is_owner = ($entity->getOwnerId() === $account->id());
+
+    // Determine access.
+    $access = AccessResult::allowedIf($admin || $is_owner);
+
+    // Add caching.
+    $access
+      ->cachePerUser()
+      ->addCacheableDependency($entity);
+
+    return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkCreateAccess(AccountInterface $account,
+    array $context,
+    $entity_bundle = NULL
+  ): AccessResultNeutral|AccessResult|AccessResultAllowed|AccessResultInterface {
+    // Allow authenticated users to create.
+    return AccessResult::allowedIf($this->userHasRole($account, 'authenticated'))
+      ->addCacheContexts(['user.roles']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkFieldAccess($operation,
+    FieldDefinitionInterface $field_definition,
+    AccountInterface $account,
+    ?FieldItemListInterface $items = NULL
+  ) {
+    // Always allow admin access.
+    if ($this->userHasAdminPermission($account)) {
+      return AccessResult::allowed()->cachePerPermissions();
+    }
+
+    // Check if this field is admin-only.
+    if ($field_definition->getSetting('admin_only')) {
+      // Restrict access to admins.
+      return AccessResult::forbidden()->cachePerPermissions();
+    }
+
+    return AccessResult::allowed();
   }
 
 }

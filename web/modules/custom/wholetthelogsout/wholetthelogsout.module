@@ -5,6 +5,8 @@
  * Core module for the Who Let the Logs Out platform.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Database\Query\SelectInterface;
 use Drupal\wholetthelogsout\Enum\CustomEntityTypes;
@@ -36,56 +38,43 @@ function wholetthelogsout_query_website_alter(AlterableInterface $query): void {
 
   $entity_type_id = CustomEntityTypes::Website->value;
 
-  // Get the current user.
+  // Get the current user & filter.
   $user = \Drupal::currentUser();
-
-  // Check if the query should bypass access.
-  // This is useful for queries done by cron, hooks, etc.
-  if ($query->hasTag('access_bypass')) {
-    $filter = FALSE;
-  }
-  // Check if this is an entity reference query.
-  elseif ($query->hasTag('entity_reference')) {
-    $filter = TRUE;
-  }
-  else {
-    // Get the entity admin permission.
-    $permission_definition = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
-
-    if ($permission_definition !== NULL) {
-      $permission = $permission_definition->getAdminPermission();
-    }
-
-    // Check if the user does not have the permission.
-    $filter = (isset($permission) && is_string($permission) && !$user->hasPermission($permission));
-  }
+  $filter = \Drupal::service('wholetthelogsout.query_helper')->isFiltered($query, $entity_type_id, $user);
 
   // Check if we should filter.
-  if ($filter) {
-    // Get the query tables.
-    $tables = $query->getTables();
+  if (!$filter) {
+    return;
+  }
 
-    // Determine the alias.
-    $alias = isset($tables[$entity_type_id]) ? $tables[$entity_type_id]['alias'] : $tables['base_table']['alias'];
+  // Get the query tables.
+  $tables = $query->getTables();
 
-    // Generate the field to filter on.
-    $field = "$alias.user_id";
+  // Determine the alias.
+  $alias = isset($tables[$entity_type_id])
+    ? $tables[$entity_type_id]['alias']
+    : $tables['base_table']['alias'];
 
-    // Iterate the existing conditions.
-    foreach ($query->conditions() as $condition) {
-      // Check if the user filter condition already exists.
-      if (is_array($condition) && ($condition['operator'] === '=') &&
-        ($condition['field'] === $field) &&
-        ($condition['value'] === $user->id())) {
-        // No need to filter anymore.
-        $filter = FALSE;
-        break;
-      }
-    }
+  // Generate the field to filter on.
+  $field = "$alias.user_id";
 
-    // Filter for entities that this user owns, if needed.
-    if ($filter) {
-      $query->condition("$alias.user_id", (string) $user->id());
+  // Iterate the existing conditions.
+  foreach ($query->conditions() as $condition) {
+    // Check if the user filter condition already exists.
+    if (is_array($condition) && ($condition['operator'] === '=') &&
+    ($condition['field'] === $field) &&
+    ($condition['value'] === $user->id())) {
+      // No need to filter anymore.
+      $filter = FALSE;
+
+      break;
     }
   }
+
+  // Filter for entities that this user owns, if needed.
+  if (!$filter) {
+    return;
+  }
+
+  $query->condition("$alias.user_id", (string) $user->id());
 }

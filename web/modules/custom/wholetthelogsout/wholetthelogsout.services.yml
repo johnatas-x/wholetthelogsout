@@ -6,3 +6,5 @@ services:
     arguments: [ '@entity.repository' ]
     tags:
       - { name: paramconverter }
+  wholetthelogsout.query_helper:
+    class: Drupal\wholetthelogsout\Services\QueryHelper

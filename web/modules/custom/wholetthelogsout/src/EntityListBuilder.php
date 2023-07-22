@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout;
 
 use Drupal\Core\Entity\EntityInterface;
@@ -33,7 +35,9 @@ class EntityListBuilder extends CoreEntityListBuilder {
     $label = $entity->label();
 
     if (!is_string($label)) {
-      $label = ($label instanceof TranslatableMarkup) ? $label->render() : '';
+      $label = $label instanceof TranslatableMarkup
+          ? $label->render()
+          : '';
     }
 
     $row = [

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Entity;
 
 use Drupal\views\EntityViewsData;
@@ -16,11 +18,11 @@ class WebsiteViewsData extends EntityViewsData {
     $data = parent::getViewsData();
 
     $data['website']['website_bulk_form'] = [
-      'title' => $this->t('Website operations bulk form'),
-      'help' => $this->t('Add a form element that lets you run operations on multiple websites.'),
       'field' => [
         'id' => 'wholetthelogsout_entity_bulk_form',
       ],
+      'help' => $this->t('Add a form element that lets you run operations on multiple websites.'),
+      'title' => $this->t('Website operations bulk form'),
     ];
 
     return $data;

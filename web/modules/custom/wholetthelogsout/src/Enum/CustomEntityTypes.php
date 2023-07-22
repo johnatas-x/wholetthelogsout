@@ -5,6 +5,8 @@
  * Enum for custom entity Types defined in this module.
  */
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout\Enum;
 
 /**

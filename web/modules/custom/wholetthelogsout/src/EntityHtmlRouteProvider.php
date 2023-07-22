@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\wholetthelogsout;
 
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -35,8 +37,8 @@ class EntityHtmlRouteProvider extends AdminHtmlRouteProvider {
       $route = $collection->get("entity.$entity_type_id.$link");
       $route?->setOption('parameters', [
         $entity_type_id => [
-          'type' => 'entity_uuid',
           'entity_type_id' => $entity_type_id,
+          'type' => 'entity_uuid',
         ],
       ]);
       $route?->setRequirement($entity_type_id, '[\w\-]+');
