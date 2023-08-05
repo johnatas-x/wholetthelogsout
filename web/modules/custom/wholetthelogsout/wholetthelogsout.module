@@ -17,8 +17,8 @@ use Drupal\wholetthelogsout\Enum\CustomEntityTypes;
 function wholetthelogsout_theme($existing, $type, $theme, $path): array {
   $items = [];
 
-  foreach (CustomEntityTypes::cases() as $type) {
-    $items[$type->value] = [
+  foreach (CustomEntityTypes::cases() as $entity_type) {
+    $items[$entity_type->value] = [
       'render element' => 'elements',
     ];
   }

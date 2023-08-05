@@ -32,7 +32,9 @@ grumphp:
       no_update_lock: true
       verbose: false
     jsonlint:
-      ignore_patterns: [ ]
+      ignore_patterns: [
+        'qodana.sarif.json'
+      ]
       detect_key_conflicts: false
     phpcpd:
       directory: [
