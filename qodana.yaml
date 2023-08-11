@@ -6,7 +6,7 @@ version: 1.0
 profile:
   name: qodana.recommended
 php:
-  version: 8.1
+  version: 8.2
 linter: jetbrains/qodana-php:latest
 exclude:
   - name: All
