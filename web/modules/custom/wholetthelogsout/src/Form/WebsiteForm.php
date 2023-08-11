@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 class WebsiteForm extends ContentEntityForm {
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function save(array $form, FormStateInterface $form_state): int {
     $entity = $this->entity;

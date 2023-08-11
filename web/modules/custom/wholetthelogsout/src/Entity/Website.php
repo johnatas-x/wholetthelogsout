@@ -74,7 +74,7 @@ class Website extends EntityBase implements WebsiteInterface {
   protected mixed $url;
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getCacheTagsToInvalidate(): array {
     return Cache::mergeTags(parent::getCacheTagsToInvalidate(), [
@@ -83,7 +83,7 @@ class Website extends EntityBase implements WebsiteInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    *
    * phpcs:disable SlevomatCodingStandard.Functions.FunctionLength.FunctionLength
    * phpcs:disable SlevomatCodingStandard.Files.FunctionLength.FunctionLength

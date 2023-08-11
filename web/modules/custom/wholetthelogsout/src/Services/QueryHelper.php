@@ -31,7 +31,7 @@ class QueryHelper implements QueryHelperInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function isFiltered(AlterableInterface $query, string $entity_type_id, AccountProxyInterface $user): bool {
     // This is useful for queries done by cron, hooks, etc.

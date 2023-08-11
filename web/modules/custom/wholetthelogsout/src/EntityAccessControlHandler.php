@@ -75,7 +75,7 @@ abstract class EntityAccessControlHandler extends CoreEntityAccessControlHandler
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function checkAccess(EntityInterface $entity,
     $operation,
@@ -103,7 +103,7 @@ abstract class EntityAccessControlHandler extends CoreEntityAccessControlHandler
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function checkCreateAccess(AccountInterface $account,
     array $context,
@@ -115,7 +115,7 @@ abstract class EntityAccessControlHandler extends CoreEntityAccessControlHandler
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function checkFieldAccess($operation,
     FieldDefinitionInterface $field_definition,

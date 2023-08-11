@@ -12,7 +12,7 @@ use Drupal\views\EntityViewsData;
 class WebsiteViewsData extends EntityViewsData {
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getViewsData(): array {
     $data = parent::getViewsData();

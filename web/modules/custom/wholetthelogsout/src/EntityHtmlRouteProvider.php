@@ -26,7 +26,7 @@ class EntityHtmlRouteProvider extends AdminHtmlRouteProvider {
   ];
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getRoutes(EntityTypeInterface $entity_type): array|RouteCollection {
     $collection = parent::getRoutes($entity_type);

@@ -15,7 +15,7 @@ use Drupal\wholetthelogsout\Entity\EntityBaseInterface;
 class ContentEntityDeleteForm extends CoreContentEntityDeleteForm {
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */

@@ -51,7 +51,7 @@ class EntityUuidConverter implements ParamConverterInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
@@ -67,7 +67,7 @@ class EntityUuidConverter implements ParamConverterInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function applies($definition, $name, Route $route): bool {
     return (

@@ -15,7 +15,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class EntityListBuilder extends CoreEntityListBuilder {
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function buildHeader(): array {
     $header = [
@@ -27,7 +27,7 @@ class EntityListBuilder extends CoreEntityListBuilder {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */

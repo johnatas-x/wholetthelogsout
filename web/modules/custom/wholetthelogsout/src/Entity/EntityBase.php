@@ -18,7 +18,7 @@ use Drupal\user\UserInterface;
 abstract class EntityBase extends ContentEntityBase implements EntityBaseInterface {
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getName(): string {
     $name = $this->get('name')->value;
@@ -29,14 +29,14 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function setName($name): void {
     $this->set('name', $name);
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getCreatedTime(): int {
     $created = $this->get('created')->value;
@@ -47,14 +47,14 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function setCreatedTime($timestamp): void {
     $this->set('created', $timestamp);
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getOwner(): UserInterface {
     $owner = $this->get('user_id')->entity;
@@ -64,7 +64,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getOwnerId(): ?int {
     $target = $this->get('user_id')->target_id;
@@ -75,7 +75,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function setOwnerId($uid): self|EntityOwnerInterface|static {
     $this->set('user_id', $uid);
@@ -84,7 +84,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function setOwner(UserInterface $account): self|EntityOwnerInterface|static {
     $this->set('user_id', $account->id());
@@ -93,7 +93,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getParentReferenceEntityTypeId(): mixed {
     // Get the parent reference field name.
@@ -107,7 +107,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getParent($parent_entity_type = NULL): mixed {
     // Get the parent reference field name.
@@ -132,7 +132,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public static function preCreate(EntityStorageInterface $storage, array &$values): void {
     parent::preCreate($storage, $values);
@@ -143,7 +143,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields = parent::baseFieldDefinitions($entity_type);
@@ -168,7 +168,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public static function getParentReferenceFieldName(): ?string {
     return NULL;
@@ -187,7 +187,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function invalidateTagsOnSave($update): void {
     // We do not use list cache tags for these entities because they are all
@@ -209,7 +209,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function urlRouteParameters($rel): array {
     $uri_route_parameters = parent::urlRouteParameters($rel);
@@ -223,7 +223,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected static function invalidateTagsOnDelete(EntityTypeInterface $entity_type, array $entities): void {
     // Skip the list tags. See invalidateTagsOnSave().
