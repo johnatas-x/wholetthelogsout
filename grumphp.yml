@@ -2,6 +2,8 @@ parameters:
   git_dir: .
   bin_dir: vendor/bin
 grumphp:
+  extensions:
+    - GrumphpDrupalCheck\ExtensionLoader
   ignore_unstaged_changes: true
   stop_on_failure: false
   hide_circumvention_tip: false
@@ -31,6 +33,13 @@ grumphp:
       no_check_lock: false
       no_update_lock: true
       verbose: false
+    drupal_check:
+      drupal_root: ~
+      memory_limit: ~
+      deprecations: true
+      analysis: false
+      php8: true
+      exclude_dir: [ ]
     jsonlint:
       ignore_patterns: [
         'qodana.sarif.json'
