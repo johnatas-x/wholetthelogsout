@@ -1,39 +1,67 @@
-name: PHP Composer
+name: Composer
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+  - push
+  - pull_request
 
 jobs:
-  build:
+  tests:
+    strategy:
+      matrix:
+        include:
+          - operating-system: 'ubuntu-latest'
+            php-version: '8.1'
 
-    runs-on: ubuntu-latest
+          - operating-system: 'ubuntu-latest'
+            php-version: '8.2'
+
+          - operating-system: 'windows-latest'
+            php-version: '8.1'
+            job-description: 'on Windows'
+
+          - operating-system: 'macos-latest'
+            php-version: '8.1'
+            job-description: 'on macOS'
+
+    name: PHP ${{ matrix.php-version }} ${{ matrix.job-description }}
+
+    runs-on: ${{ matrix.operating-system }}
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Set git to use LF
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-dir)"
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ runner.os }}-${{ matrix.php-version }}-${{ hashFiles('**/composer.*') }}-${{ matrix.composer-flags }}
+          restore-keys: |
+            composer-${{ runner.os }}-${{ matrix.php-version }}-${{ hashFiles('**/composer.*') }}-
+            composer-${{ runner.os }}-${{ matrix.php-version }}-
+            composer-${{ runner.os }}-
+            composer-
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          retry_wait_seconds: 30
+          command: |
+            composer update --optimize-autoloader --no-interaction --no-progress ${{ matrix.composer-flags }}
+            composer info -D
