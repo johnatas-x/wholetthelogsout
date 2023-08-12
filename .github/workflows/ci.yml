@@ -110,11 +110,5 @@ jobs:
             composer info -D
 
       - name: Run GrumPHP
-        run: php ./vendor/bin/grumphp run > grumphp-results.sarif
+        run: php ./vendor/bin/grumphp run
         continue-on-error: true
-
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: grumphp-results.sarif
-          wait-for-processing: true
