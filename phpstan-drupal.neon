@@ -1,7 +1,6 @@
 # Mandatory exceptions for Drupal.
 # Ignore certain standards for legacy procedural functions in module, theme, and includes.
 # Specifically centered around hook/alters and lack of proper types.
-
 parameters:
     ignoreErrors:
       -

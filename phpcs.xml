@@ -95,7 +95,7 @@
 
   <!-- PHPCompatibility. -->
   <rule ref="PHPCompatibility"/>
-  <config name="testVersion" value="8.1"/>
+  <config name="testVersion" value="8.2"/>
   <rule ref="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared.resourceFound">
     <!-- Ignore these plugins since the core's rest module does not either. -->
     <exclude-pattern>*/Plugin/rest/resource/*</exclude-pattern>
