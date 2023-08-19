@@ -139,6 +139,8 @@ grumphp:
       force_patterns: [ ]
       ignore_patterns: [ ]
       triggered_by:
+        - engine
+        - inc
         - install
         - module
         - php
@@ -148,6 +150,7 @@ grumphp:
       use_grumphp_paths: false
     shell:
       scripts:
+        - [ "-c", ".docksal/commands/composer/reinstall"]
         - [ "-c", ".docksal/commands/init"]
         - [ "-c", ".docksal/commands/quality"]
         - .docksal/helpers/styles

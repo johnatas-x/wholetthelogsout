@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+## Reinstall vendor.
+##
+## Usage: fin composer/reinstall
+
+# Abort if anything fails
+set -e
+
+if [ -x "$(command -v fin)" ]; then
+  # Remove vendor.
+  rm -Rf vendor
+  # Remove lock file.
+  rm composer.lock
+  # Install vendor.
+  fin composer install --no-progress --prefer-dist --optimize-autoloader
+fi
