@@ -38,6 +38,7 @@ grumphp:
       memory_limit: ~
       deprecations: true
       analysis: false
+      style: false
       php8: true
       exclude_dir: [ ]
     jsonlint:
