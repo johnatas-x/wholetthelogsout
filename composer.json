@@ -23,7 +23,7 @@
         "drush/drush": "^12"
     },
     "require-dev": {
-        "johnatas-x/angry-bearded": "^1.0",
+        "johnatas-x/angry-bearded": "^1.1",
         "roave/security-advisories": "dev-latest"
     },
     "conflict": {
@@ -35,7 +35,7 @@
             "url": "https://packages.drupal.org/8"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
