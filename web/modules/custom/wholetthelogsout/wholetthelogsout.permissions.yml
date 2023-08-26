@@ -1,3 +1,7 @@
 administer website entities:
   title: 'Administer Website entities'
   restrict access: true
+
+administer event entities:
+  title: 'Administer Event entities'
+  restrict access: true

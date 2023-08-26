@@ -28,53 +28,51 @@ function wholetthelogsout_theme($existing, $type, $theme, $path): array {
 
 /**
  * Implements hook_query_TAG_alter().
- *
- * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
 function wholetthelogsout_query_website_alter(AlterableInterface $query): void {
-  if (!$query instanceof SelectInterface) {
+  if (!($query instanceof SelectInterface)) {
     return;
   }
 
-  $entity_type_id = CustomEntityTypes::Website->value;
+  \Drupal::service('wholetthelogsout.query_helper')->queryTagAlter($query, CustomEntityTypes::Website);
+}
 
-  // Get the current user & filter.
-  $user = \Drupal::currentUser();
-  $filter = \Drupal::service('wholetthelogsout.query_helper')->isFiltered($query, $entity_type_id, $user);
-
-  // Check if we should filter.
-  if (!$filter) {
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function wholetthelogsout_query_event_alter(AlterableInterface $query): void {
+  if (!($query instanceof SelectInterface)) {
     return;
   }
 
-  // Get the query tables.
-  $tables = $query->getTables();
+  \Drupal::service('wholetthelogsout.query_helper')->queryTagAlter($query, CustomEntityTypes::Event);
+}
 
-  // Determine the alias.
-  $alias = isset($tables[$entity_type_id])
-    ? $tables[$entity_type_id]['alias']
-    : $tables['base_table']['alias'];
+/**
+ * Implements hook_cron().
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function wholetthelogsout_cron(): void {
+  // Load event storage.
+  $event_storage = \Drupal::entityTypeManager()->getStorage('event');
 
-  // Generate the field to filter on.
-  $field = "$alias.user_id";
+  // Find up to 100 expired events.
+  $event_ids = $event_storage
+    ->getQuery()
+    ->accessCheck()
+    ->condition('expire', \Drupal::time()->getRequestTime(), '<')
+    ->addTag('access_bypass')
+    ->range(0, 100)
+    ->execute();
 
-  // Iterate the existing conditions.
-  foreach ($query->conditions() as $condition) {
-    // Check if the user filter condition already exists.
-    if (is_array($condition) && ($condition['operator'] === '=') &&
-    ($condition['field'] === $field) &&
-    ($condition['value'] === $user->id())) {
-      // No need to filter anymore.
-      $filter = FALSE;
-
-      break;
-    }
-  }
-
-  // Filter for entities that this user owns, if needed.
-  if (!$filter) {
+  // Check for event IDs.
+  if (!$event_ids) {
     return;
   }
 
-  $query->condition("$alias.user_id", (string) $user->id());
+  // Load and delete the events.
+  $event_storage->delete($event_storage->loadMultiple($event_ids));
 }

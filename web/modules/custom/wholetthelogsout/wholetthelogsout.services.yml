@@ -6,5 +6,12 @@ services:
     arguments: [ '@entity.repository' ]
     tags:
       - { name: paramconverter }
+  plugin.manager.alert_type:
+    class: Drupal\wholetthelogsout\Plugin\AlertTypeManager
+    parent: default_plugin_manager
   wholetthelogsout.query_helper:
     class: Drupal\wholetthelogsout\Services\QueryHelper
+    arguments: [ '@entity_type.manager', '@current_user' ]
+  wholetthelogsout.dispatcher:
+    class: Drupal\wholetthelogsout\Services\AlertDispatcher
+    arguments: [ '@entity_type.manager', '@plugin.manager.alert_type', '@path.matcher' ]

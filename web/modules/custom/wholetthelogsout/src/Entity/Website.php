@@ -25,16 +25,16 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\wholetthelogsout\EntityListBuilder",
- *     "views_data" = "Drupal\wholetthelogsout\Entity\WebsiteViewsData",
+ *     "views_data" = "Drupal\wholetthelogsout\Entity\ViewsData\WebsiteViewsData",
  *     "form" = {
  *       "default" = "Drupal\wholetthelogsout\Form\WebsiteForm",
  *       "add" = "Drupal\wholetthelogsout\Form\WebsiteForm",
  *       "edit" = "Drupal\wholetthelogsout\Form\WebsiteForm",
  *       "delete" = "Drupal\wholetthelogsout\Form\WebsiteDeleteForm",
  *     },
- *     "access" = "Drupal\wholetthelogsout\WebsiteAccessControlHandler",
+ *     "access" = "Drupal\wholetthelogsout\Entity\Access\WebsiteAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\wholetthelogsout\EntityHtmlRouteProvider",
+ *       "html" = "Drupal\wholetthelogsout\Entity\Routing\EntityHtmlRouteProvider",
  *     },
  *   },
  *   base_table = "website",

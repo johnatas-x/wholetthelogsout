@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\wholetthelogsout;
+namespace Drupal\wholetthelogsout\Entity\Routing;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;

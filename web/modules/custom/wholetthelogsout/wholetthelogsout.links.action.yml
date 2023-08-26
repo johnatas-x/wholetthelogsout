@@ -3,3 +3,9 @@ entity.website.add_form:
   title: 'Add website'
   appears_on:
     - entity.website.collection
+
+entity.event.add_form:
+  route_name: entity.event.add_form
+  title: 'Add event'
+  appears_on:
+    - entity.event.collection

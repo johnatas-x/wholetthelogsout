@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\wholetthelogsout;
+namespace Drupal\wholetthelogsout\Entity\Access;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultAllowed;
