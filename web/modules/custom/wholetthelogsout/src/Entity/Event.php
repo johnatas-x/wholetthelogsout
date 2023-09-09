@@ -148,7 +148,7 @@ class Event extends EntityBase implements EventInterface {
     parent::postSave($storage, $update);
 
     // Dispatch alerts only for new events.
-    if ($update) {
+    if ($update === TRUE) {
       return;
     }
 

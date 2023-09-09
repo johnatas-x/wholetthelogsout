@@ -99,7 +99,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
     // Get the parent reference field name.
     $parent_field_name = self::getParentReferenceFieldName();
 
-    if ($parent_field_name) {
+    if (is_string($parent_field_name)) {
       return $this->getFieldDefinition($parent_field_name)?->getSetting('target_type');
     }
 
@@ -114,7 +114,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
     $parent_field_name = self::getParentReferenceFieldName();
 
     // Stop if this entity does not have a parent.
-    if (!$parent_field_name) {
+    if (!is_string($parent_field_name)) {
       return NULL;
     }
 
@@ -123,7 +123,7 @@ abstract class EntityBase extends ContentEntityBase implements EntityBaseInterfa
     assert($parent instanceof EntityBaseInterface);
 
     // Check if this is the correct type.
-    if (!$parent_entity_type || ($parent->getEntityTypeId() === $parent_entity_type)) {
+    if (!is_string($parent_entity_type) || ($parent->getEntityTypeId() === $parent_entity_type)) {
       return $parent;
     }
 

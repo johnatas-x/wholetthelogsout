@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\wholetthelogsout\Services;
 
 use Drupal\Core\Database\Query\SelectInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\wholetthelogsout\Enum\CustomEntityTypes;
@@ -57,7 +58,7 @@ class QueryHelper implements QueryHelperInterface {
     // Get the entity admin permission.
     $perm_def = $this->entityTypeManager->getDefinition($entity_type_id);
 
-    if ($perm_def !== NULL) {
+    if ($perm_def instanceof EntityTypeInterface) {
       $permission = $perm_def->getAdminPermission();
     }
 
@@ -75,7 +76,7 @@ class QueryHelper implements QueryHelperInterface {
     $filter = $this->isFiltered($query, $entity_type_id);
 
     // Check if we should filter.
-    if (!$filter) {
+    if ($filter === FALSE) {
       return;
     }
 
@@ -104,7 +105,7 @@ class QueryHelper implements QueryHelperInterface {
     }
 
     // Filter for entities that this user owns, if needed.
-    if (!$filter) {
+    if ($filter === FALSE) {
       return;
     }
 

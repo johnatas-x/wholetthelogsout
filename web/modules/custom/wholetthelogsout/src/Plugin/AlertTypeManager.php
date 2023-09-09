@@ -57,7 +57,9 @@ class AlertTypeManager extends DefaultPluginManager {
     $settings = [];
 
     // Determine the plugin ID.
-    $plugin_id = $plugin_id ?: (string) $alert->getType();
+    $plugin_id = is_string($plugin_id)
+      ? $plugin_id
+      : (string) $alert->getType();
 
     $value = $alert->getSettings();
 

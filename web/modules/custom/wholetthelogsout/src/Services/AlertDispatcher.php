@@ -64,7 +64,7 @@ class AlertDispatcher implements AlertDispatcherInterface {
     $alerts = $this->loadEventAlerts($event);
 
     // Load matching alerts.
-    if ($alerts) {
+    if (!empty($alerts)) {
       // Iterate the alerts.
       foreach ($alerts as $alert) {
         // Dispatch the alert.
@@ -103,7 +103,7 @@ class AlertDispatcher implements AlertDispatcherInterface {
       ->execute();
 
     // Load the alerts.
-    $alerts = $ids
+    $alerts = !empty($ids)
         ? $storage->loadMultiple($ids)
         : [];
 
@@ -113,7 +113,7 @@ class AlertDispatcher implements AlertDispatcherInterface {
       $types = $alert->getEventTypes();
 
       // Check if this alert has event type filters and if the type is not a match.
-      if (!$types || $this->pathMatcher->matchPath((string) $event->getType(), implode("\n", $types))) {
+      if (empty($types) || $this->pathMatcher->matchPath((string) $event->getType(), implode("\n", $types))) {
         continue;
       }
 
