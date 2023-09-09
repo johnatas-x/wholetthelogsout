@@ -23,7 +23,7 @@
         "drush/drush": "^12"
     },
     "require-dev": {
-        "johnatas-x/angry-bearded": "^1.2",
+        "johnatas-x/angry-bearded": "^1.3",
         "roave/security-advisories": "dev-latest"
     },
     "conflict": {
